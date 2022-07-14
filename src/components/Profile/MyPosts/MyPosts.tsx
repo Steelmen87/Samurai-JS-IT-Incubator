@@ -12,9 +12,8 @@ const MyPosts = () => {
                 <button>Add post</button>
             </div>
             <div className={style.posts}>
-                <Post/>
-                <Post/>
-                <Post/>
+                <Post message='Hi how are you ?' likeCounter={3}/>
+                <Post message='It"s my second post' likeCounter={5}/>
             </div>
         </div>
 

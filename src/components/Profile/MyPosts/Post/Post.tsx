@@ -1,17 +1,23 @@
 import style from "./Post.module.css";
 import React from "react";
 
-const Post = () => {
+interface PropsType {
+    message: string
+    likeCounter: number
+}
+
+const Post = (props: PropsType) => {
+    const {message, likeCounter} = props;
     return (
         <div className={style.item}>
             <img
                 src='https://e7.pngegg.com/pngimages/581/573/png-clipart-ninja-holding-red-ninja-laptop-illustration-ninja-computer-programming-learning-study-skills-avatar-heroes-cartoon.png'
                 alt=''
             />
-            Post1
+            {message}
             <div>
                 <span>
-                    Like
+                    <strong>{ likeCounter}</strong>
                 </span>
             </div>
         </div>
