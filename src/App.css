@@ -12,3 +12,7 @@
     grid-gap: 3px;
 
 }
+.app_wrapper_content{
+    grid-area: content;
+    background: #5bdeef;
+}

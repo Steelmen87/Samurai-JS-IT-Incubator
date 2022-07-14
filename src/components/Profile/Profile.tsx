@@ -4,7 +4,7 @@ import MyPosts from "./MyPosts/MyPosts";
 
  const Profile = () => {
     return (
-        <div className={style.content}>
+        <div>
             <div>
                 <img src='https://gidfon.com/prev/8919.jpg' alt=''/>
             </div>
