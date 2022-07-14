@@ -2,12 +2,16 @@
 .nav {
     grid-area: nav;
     background: #ecc659;
+    padding: 20px;
 }
-.item{
+
+.item a {
     color: white;
     font-size: 20px;
+    text-decoration: none;
     /*сам добавил*/
 }
-.active{
+
+.item a.activeLink {
     color: #761bf5;
 }
