@@ -21,15 +21,15 @@ const Dialogs = (props: PropsType) => {
         {id: '4', message: 'Yo yO1'},
         {id: '5', message: 'Yo yO2'},
     ]
-
+    let dialogsElements = dialogData.map(el => <Dialog name={el.name} id={el.id}/>)
+    let messagesData = messageData.map(el => <Message message={el.message}/>)
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>
-                {dialogData.map(el => <Dialog name={el.name} id={el.id}/>)}
-
+                {dialogsElements}
             </div>
             <div className={style.messages}>
-                {messageData.map(el => <Message message={el.message}/>)}
+                {messagesData}
             </div>
         </div>
     )

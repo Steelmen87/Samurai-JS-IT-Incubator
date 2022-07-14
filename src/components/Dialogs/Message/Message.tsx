@@ -1,4 +1,4 @@
-import style from "../Dialogs.module.css";
+import style from "./Message.module.css";
 import React from "react";
 
 type MessageProps = {
