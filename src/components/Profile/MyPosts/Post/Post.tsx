@@ -14,6 +14,7 @@ const Post = (props: PropsType) => {
                 src='https://e7.pngegg.com/pngimages/581/573/png-clipart-ninja-holding-red-ninja-laptop-illustration-ninja-computer-programming-learning-study-skills-avatar-heroes-cartoon.png'
                 alt=''
             />
+            <br/>
             {message}
             <div>
                 <span>

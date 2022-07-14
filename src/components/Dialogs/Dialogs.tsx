@@ -6,21 +6,30 @@ import Message from "./Message/Message";
 
 type PropsType = {}
 const Dialogs = (props: PropsType) => {
+
+    let dialogData = [
+        {name: "Dimych", id: '1'},
+        {name: "Andrey", id: '2'},
+        {name: "Sveta", id: '3'},
+        {name: "Valera", id: '4'},
+        {name: "Viktor", id: '5'},
+    ]
+    let messageData = [
+        {id: '1', message: 'Hi'},
+        {id: '2', message: 'How are you'},
+        {id: '3', message: 'Yo yO'},
+        {id: '4', message: 'Yo yO1'},
+        {id: '5', message: 'Yo yO2'},
+    ]
+
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>
-                <Dialog name={'Dimych'} id='1'/>
-                <Dialog name={'Andrey'} id='2'/>
-                <Dialog name={'Sveta'} id='3'/>
-                <Dialog name={'Valera'} id='4'/>
-                <Dialog name={'Viktor'} id='5'/>
+                {dialogData.map(el => <Dialog name={el.name} id={el.id}/>)}
+
             </div>
             <div className={style.messages}>
-                <Message message={'Hi'}/>
-                <Message message={'How are you'}/>
-                <Message message={'Yo yO'}/>
-                <Message message={'Yo yO1'}/>
-                <Message message={'Yo yO2'}/>
+                {messageData.map(el => <Message message={el.message}/>)}
             </div>
         </div>
     )
