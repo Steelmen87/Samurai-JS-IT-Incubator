@@ -28,9 +28,9 @@ const Navbar = (props:PropsType) => {
                 <NavLink to='/settings' activeClassName={style.activeLink}>Settings</NavLink>
             </div>
             <div className={`${style.item} ${style.friends}`}>
-                <NavLink to='/friends' activeClassName={style.activeLink}>Friends</NavLink>
+               {/* <NavLink to='/friends' activeClassName={style.activeLink}>*/}Friends{/*</NavLink>*/}
             </div>
-            <Route path='/friends' render={() => <Friend friends={friends}/>}/>
+            <Friend friends={friends}/>
         </nav>
     )
 }
