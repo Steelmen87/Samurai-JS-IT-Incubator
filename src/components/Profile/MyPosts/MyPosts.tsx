@@ -2,13 +2,19 @@ import React from "react";
 import style from './MyPosts.module.css'
 import Post from "./Post/Post";
 
-type PropsType = {}
+
+export type PostType = {
+    id: string
+    message: string
+    likeCounter: number
+}
+export type PropsType = {
+    postData: Array<PostType>
+}
 
 const MyPosts = (props: PropsType) => {
-    let postData = [
-        {id: '1', message: 'Hi how are you ?', likeCounter: 4},
-        {id: '2', message: 'It"s my second post', likeCounter: 0},
-    ]
+    let {postData} = props
+
     let postElement = postData.map(el =>
         <Post
             message={el.message}

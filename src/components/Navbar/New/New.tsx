@@ -1,5 +1,4 @@
 import React from 'react'
-import style from './New.module.css'
 
 type PropsType = {}
 const New = (props: PropsType) => {

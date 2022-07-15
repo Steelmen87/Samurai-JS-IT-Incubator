@@ -5,19 +5,38 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from 'react-router-dom';
-import New from "./components/New/New";
-import Music from "./components/Music/Music";
-import Settings from './components/Settirngs/Settings';
+import New from "./components/Navbar/New/New";
+import Music from "./components/Navbar/Music/Music";
+import Settings from './components/Navbar/Settirngs/Settings';
+import {StorePropsTypeMain} from "./redux/State";
+import Friend from "./components/Navbar/Friends/Friends";
 
-function App() {
+
+type AppPropsType = {
+    state: StorePropsTypeMain
+}
+
+function App(props: AppPropsType) {
+    let {state} = props
     return (
         <BrowserRouter>
             <div className='app_wrapper'>
                 <Header/>
-                <Navbar/>
+                <Navbar friends={state.sidebar.friends}/>
+
                 <div className='app_wrapper_content'>
-                    <Route path='/profile' component={Profile}/>
-                    <Route path='/dialogs' component={Dialogs}/>
+                    {/* <Route path='/profile' component={Profile}/>
+                    <Route path='/dialogs' component={Dialogs}/>*/}
+
+                    <Route path='/profile' render={() => <Profile
+                        postData={state.profilePage.postData}/>}/>
+
+                    <Route path='/dialogs' render={() => <Dialogs
+                        dialogData={state.dialogsPage.dialogData}
+                        messageData={state.dialogsPage.messageData}
+                    />}/>
+
+
 
                     <Route path='/new' component={New}/>
                     <Route path='/music' component={Music}/>

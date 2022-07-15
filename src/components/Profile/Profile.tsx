@@ -2,11 +2,21 @@ import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
-const Profile = () => {
+type Post = {
+    id: string
+    message: string
+    likeCounter: number
+}
+type ProfileType = {
+    postData: Array<Post>
+}
+
+const Profile = (props: ProfileType) => {
+    let {postData} = props
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts postData={postData}/>
         </div>
     )
 }
