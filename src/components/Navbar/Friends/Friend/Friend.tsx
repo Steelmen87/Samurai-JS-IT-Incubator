@@ -11,7 +11,7 @@ type propsType = {
 const Friend = (props: propsType) => {
     const {state} = props
     return (
-        <div>
+        <div className={style.friend}>
             <img className={style.ava} src={state.avatar} alt='ava'/>
             <br/>
             {state.name}
