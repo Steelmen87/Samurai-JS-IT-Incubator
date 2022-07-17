@@ -9,14 +9,17 @@ type Post = {
 }
 type ProfileType = {
     postData: Array<Post>
+    addPost(postMessage:string):void
 }
 
 const Profile = (props: ProfileType) => {
-    let {postData} = props
+    let {postData,addPost} = props
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts postData={postData}/>
+            <MyPosts
+                addPost={addPost}
+                postData={postData}/>
         </div>
     )
 }

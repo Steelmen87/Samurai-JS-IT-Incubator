@@ -10,21 +10,23 @@ export type PostType = {
 }
 export type PropsType = {
     postData: Array<PostType>
+    addPost(postMessage: string): void
 }
 
 const MyPosts = (props: PropsType) => {
-    let {postData} = props
+    let {postData, addPost} = props
 
     let postElement = postData.map(el =>
         <Post
             message={el.message}
             likeCounter={el.likeCounter}
         />)
-    let newPostElement:RefObject<HTMLTextAreaElement> = React.createRef();
+    let newPostElement: RefObject<HTMLTextAreaElement> = React.createRef();
 
-    let addPost = () =>{
+    let ButtonAddPost = () => {
         let text = newPostElement.current?.value
-        alert(text)
+        text && addPost(text)
+
     }
 
     return (
@@ -33,7 +35,7 @@ const MyPosts = (props: PropsType) => {
             <div>
                 <textarea ref={newPostElement}></textarea>
                 <br/>
-                <button onClick={addPost}>Add post</button>
+                <button onClick={ButtonAddPost}>Add post</button>
             </div>
             <div className={style.posts}>
                 {postElement}

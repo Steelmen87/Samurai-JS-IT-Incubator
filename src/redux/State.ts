@@ -33,7 +33,6 @@ export type StorePropsTypeMain = {
 
 export let state: StorePropsTypeMain = {
     profilePage: {
-
         postData: [
             {id: '1', message: 'Hi how are you ?', likeCounter: 4},
             {id: '2', message: 'It"s my second post', likeCounter: 34},
@@ -86,4 +85,12 @@ export let state: StorePropsTypeMain = {
 
 
     }
+}
+export let addPost = (postMessage:string) => {
+    let newPost:PostDataType = {
+        id:'5',
+        message:postMessage,
+        likeCounter:0
+    }
+    state.profilePage.postData.push(newPost)
 }
