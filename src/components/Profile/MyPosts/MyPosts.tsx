@@ -26,14 +26,13 @@ const MyPosts = (props: PropsType) => {
     let ButtonAddPost = () => {
         let text = newPostElement.current?.value
         text && addPost(text)
-
     }
 
     return (
         <div className={style.postsBlock}>
             <h3>My post</h3>
             <div>
-                <textarea ref={newPostElement}></textarea>
+                <textarea ref={newPostElement} ></textarea>
                 <br/>
                 <button onClick={ButtonAddPost}>Add post</button>
             </div>
