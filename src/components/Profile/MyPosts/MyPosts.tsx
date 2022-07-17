@@ -10,11 +10,13 @@ export type PostType = {
 }
 export type PropsType = {
     postData: Array<PostType>
+    newPostText: string
+    updateNewPostText: (newText: string) => void
     addPost(postMessage: string): void
 }
 
 const MyPosts = (props: PropsType) => {
-    let {postData, addPost} = props
+    let {postData, addPost, newPostText, updateNewPostText} = props
 
     let postElement = postData.map(el =>
         <Post
@@ -24,15 +26,21 @@ const MyPosts = (props: PropsType) => {
     let newPostElement: RefObject<HTMLTextAreaElement> = React.createRef();
 
     let ButtonAddPost = () => {
-        let text = newPostElement.current?.value
-        text && addPost(text)
+        addPost(newPostText)
     }
-
+    let onPostChange = () => {
+        let text = newPostElement.current?.value
+        text && updateNewPostText(text)
+    }
     return (
         <div className={style.postsBlock}>
             <h3>My post</h3>
             <div>
-                <textarea ref={newPostElement} ></textarea>
+                <textarea
+                    value={newPostText}
+                    onChange={onPostChange}
+                    ref={newPostElement}
+                />
                 <br/>
                 <button onClick={ButtonAddPost}>Add post</button>
             </div>

@@ -13,11 +13,12 @@ import {StorePropsTypeMain} from "./redux/State";
 
 type AppPropsType = {
     state: StorePropsTypeMain
+    updateNewPostText:(newText: string) => void
     addPost(postMessage:string):void
 }
 
 function App(props: AppPropsType) {
-    let {state,addPost} = props
+    let {state,addPost,updateNewPostText} = props
     return (
         <div className='app_wrapper'>
             <Header/>
@@ -27,6 +28,8 @@ function App(props: AppPropsType) {
                 {/* <Route path='/profile' component={Profile}/>
                     <Route path='/dialogs' component={Dialogs}/>*/}
                 <Route path='/profile' render={() => <Profile
+                    updateNewPostText={updateNewPostText}
+                    newPostText={state.profilePage.newPostText}
                     addPost={addPost}
                     postData={state.profilePage.postData}/>}/>
 
