@@ -23,12 +23,13 @@ const MyPosts = (props: PropsType) => {
             message={el.message}
             likeCounter={el.likeCounter}
         />)
-    let newPostElement: RefObject<HTMLTextAreaElement> = React.createRef();
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let ButtonAddPost = () => {
         addPost(newPostText)
     }
     let onPostChange = () => {
+
         let text = newPostElement.current?.value
         text && updateNewPostText(text)
     }

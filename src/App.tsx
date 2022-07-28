@@ -13,12 +13,14 @@ import {StorePropsTypeMain} from "./redux/State";
 
 type AppPropsType = {
     state: StorePropsTypeMain
-    updateNewPostText:(newText: string) => void
-    addPost(postMessage:string):void
+    updateNewPostText: (newText: string) => void
+    addPost(postMessage: string): void
+    changeNewText(changeText: string): void
+    addDialogText(changeText: string): void
 }
 
-function App(props: AppPropsType) {
-    let {state,addPost,updateNewPostText} = props
+const App: React.FC<AppPropsType> = (props) => {
+    let {state, addPost, updateNewPostText,changeNewText,addDialogText} = props
     return (
         <div className='app_wrapper'>
             <Header/>
@@ -34,8 +36,11 @@ function App(props: AppPropsType) {
                     postData={state.profilePage.postData}/>}/>
 
                 <Route path='/dialogs' render={() => <Dialogs
+                    addDialogText={addDialogText}
+                    changeNewText={changeNewText}
                     dialogData={state.dialogsPage.dialogData}
                     messageData={state.dialogsPage.messageData}
+                    message={state.dialogsPage.newMassageText}
                 />}/>
 
 

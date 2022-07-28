@@ -20,18 +20,24 @@ export type FriendType = {
     avatar: string
 }
 
+type profilePageType = {
+    postData: Array<PostDataType>
+    newPostText: string
+}
+type dialogsPageType = {
+    messageData: Array<MessageType>
+    dialogData: Array<DialogType>
+    newMassageText: string
+}
+
+type sidebarType = {
+    friends: Array<FriendType>
+}
+
 export type StorePropsTypeMain = {
-    profilePage: {
-        postData: Array<PostDataType>
-        newPostText: string
-    },
-    dialogsPage: {
-        messageData: Array<MessageType>
-        dialogData: Array<DialogType>
-    },
-    sidebar: {
-        friends: Array<FriendType>
-    }
+    profilePage: profilePageType,
+    dialogsPage: dialogsPageType,
+    sidebar: sidebarType
 }
 
 export let state: StorePropsTypeMain = {
@@ -50,30 +56,26 @@ export let state: StorePropsTypeMain = {
             {id: '4', message: 'Yo yO1'},
             {id: '5', message: 'Yo yO2'},
         ],
+        newMassageText: 'Dialog text',
         dialogData: [
             {
-                name: "Dimych",
-                id: '1',
+                name: "Dimych", id: '1',
                 avatar: 'https://avatars.mds.yandex.net/i?id=6cd69ff70cc480826905181d80007878-5356799-images-thumbs&n=13'
             },
             {
-                name: "Andrey",
-                id: '2',
+                name: "Andrey", id: '2',
                 avatar: 'https://avatars.mds.yandex.net/i?id=6cd69ff70cc480826905181d80007878-5356799-images-thumbs&n=13'
             },
             {
-                name: "Sveta",
-                id: '3',
+                name: "Sveta", id: '3',
                 avatar: 'https://avatars.mds.yandex.net/i?id=6cd69ff70cc480826905181d80007878-5356799-images-thumbs&n=13'
             },
             {
-                name: "Valera",
-                id: '4',
+                name: "Valera", id: '4',
                 avatar: 'https://avatars.mds.yandex.net/i?id=6cd69ff70cc480826905181d80007878-5356799-images-thumbs&n=13'
             },
             {
-                name: "Viktor!",
-                id: '5',
+                name: "Viktor!", id: '5',
                 avatar: 'https://avatars.mds.yandex.net/i?id=6cd69ff70cc480826905181d80007878-5356799-images-thumbs&n=13'
             },
         ],
@@ -110,17 +112,33 @@ export let state: StorePropsTypeMain = {
 
     }
 }
-export let addPost = () => {
+export let addPost = (message: string) => {
     let newPost: PostDataType = {
         id: '5',
-        message: state.profilePage.newPostText,
+        message: message,
         likeCounter: 0
     }
     state.profilePage.postData.push(newPost)
-    state.profilePage.newPostText= ''
+    state.profilePage.newPostText = ''
     rerenderEntireTree(state)
 }
 export let updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText;
+    rerenderEntireTree(state)
+}
+
+
+
+export const changeDialogText = (newText: string) => {
+    state.dialogsPage.newMassageText = newText;
+    rerenderEntireTree(state)
+}
+export let addDialogText = (message: string) => {
+    let newMessage: MessageType = {
+        id: '5',
+        message: message,
+    }
+    state.dialogsPage.messageData.push(newMessage)
+    state.dialogsPage.newMassageText = ''
     rerenderEntireTree(state)
 }
