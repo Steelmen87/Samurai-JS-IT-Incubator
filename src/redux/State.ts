@@ -1,5 +1,6 @@
-import {rerenderEntireTree} from "../render";
-
+let rerenderEntireTree = (state: StorePropsTypeMain) => {
+    console.log('State was changed !')
+}
 export type DialogType = {
     id: string
     name: string
@@ -127,8 +128,6 @@ export let updateNewPostText = (newText: string) => {
     rerenderEntireTree(state)
 }
 
-
-
 export const changeDialogText = (newText: string) => {
     state.dialogsPage.newMassageText = newText;
     rerenderEntireTree(state)
@@ -141,4 +140,10 @@ export let addDialogText = (message: string) => {
     state.dialogsPage.messageData.push(newMessage)
     state.dialogsPage.newMassageText = ''
     rerenderEntireTree(state)
+}
+
+type ObserverType = (state: StorePropsTypeMain)=>void
+
+export const subscribe = (observer: ObserverType) => {
+    rerenderEntireTree = observer
 }
