@@ -123,6 +123,8 @@ export let addPost = (message: string) => {
     state.profilePage.newPostText = ''
     rerenderEntireTree(state)
 }
+
+
 export let updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText;
     rerenderEntireTree(state)
