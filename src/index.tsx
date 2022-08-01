@@ -1,27 +1,17 @@
 import React from 'react';
 import './index.css';
-import {
-    addDialogText,
-    addPost,
-    changeDialogText,
-    state,
-    StorePropsTypeMain,
-    subscribe,
-    updateNewPostText
-} from "./redux/State";
+
 import ReactDOM from 'react-dom';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
+import {RootStoreType, store} from "./redux/State";
 
-let rerenderEntireTree = (state:StorePropsTypeMain) => {
+let state = store.getState()
+console.log(state)
+let rerenderEntireTree = (state: RootStoreType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App
-                addDialogText={addDialogText}
-                changeNewText={changeDialogText}
-                updateNewPostText={updateNewPostText}
-                state={state}
-                addPost={addPost}
+            <App store={store}
             />
         </BrowserRouter>,
         document.getElementById('root')
@@ -30,4 +20,4 @@ let rerenderEntireTree = (state:StorePropsTypeMain) => {
 
 
 rerenderEntireTree(state);
-subscribe(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)

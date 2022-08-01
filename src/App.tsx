@@ -8,19 +8,20 @@ import {Route} from 'react-router-dom';
 import New from "./components/Navbar/New/New";
 import Music from "./components/Navbar/Music/Music";
 import Settings from './components/Navbar/Settirngs/Settings';
-import {StorePropsTypeMain} from "./redux/State";
+import {RootStoreType, StoreType} from "./redux/State";
 
 
 type AppPropsType = {
-    state: StorePropsTypeMain
+    store: StoreType
+    /*state: RootStoreType
     updateNewPostText: (newText: string) => void
     addPost(postMessage: string): void
     changeNewText(changeText: string): void
-    addDialogText(changeText: string): void
+    addDialogText(changeText: string): void*/
 }
 
 const App: React.FC<AppPropsType> = (props) => {
-    let {state, addPost, updateNewPostText,changeNewText,addDialogText} = props
+    let state = props.store.getState()
     return (
         <div className='app_wrapper'>
             <Header/>
@@ -30,14 +31,14 @@ const App: React.FC<AppPropsType> = (props) => {
                 {/* <Route path='/profile' component={Profile}/>
                     <Route path='/dialogs' component={Dialogs}/>*/}
                 <Route path='/profile' render={() => <Profile
-                    updateNewPostText={updateNewPostText}
+                    updateNewPostText={props.store.updateNewPostText.bind(props.store)}
                     newPostText={state.profilePage.newPostText}
-                    addPost={addPost}
+                    addPost={props.store.addPost.bind(props.store)}
                     postData={state.profilePage.postData}/>}/>
 
                 <Route path='/dialogs' render={() => <Dialogs
-                    addDialogText={addDialogText}
-                    changeNewText={changeNewText}
+                    addDialogText={props.store.addDialogText.bind(props.store)}
+                    changeNewText={props.store.changeDialogText.bind(props.store)}
                     dialogData={state.dialogsPage.dialogData}
                     messageData={state.dialogsPage.messageData}
                     message={state.dialogsPage.newMassageText}
