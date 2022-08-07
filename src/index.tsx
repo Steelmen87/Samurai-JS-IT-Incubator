@@ -3,7 +3,7 @@ import './index.css';
 
 import ReactDOM from 'react-dom';
 import App from './App';
-import {BrowserRouter, HashRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 import {RootStoreType, store} from "./redux/State";
 
 let state = store.getState()
@@ -11,8 +11,7 @@ console.log(state)
 let rerenderEntireTree = (state: RootStoreType) => {
     ReactDOM.render(
         <HashRouter>
-            <App store={store}
-            />
+            <App store={store}/>
         </HashRouter>,
         document.getElementById('root')
     );

@@ -1,3 +1,8 @@
+export const ADD_POST = 'ADD-POST';
+export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+export const CHANGE_DIALOG_TEXT = 'CHANGE-DIALOG-TEXT';
+export const ADD_DIALOG_TEXT = 'ADD-DIALOG-TEXT';
+
 export type DialogType = {
     id: string
     name: string
@@ -43,13 +48,14 @@ export type StoreType = {
         dialogsPage: dialogsPageType,
         sidebar: sidebarType
     }
-    addPost: (message: string) => void
-    updateNewPostText: (newText: string) => void
-    changeDialogText: (newText: string) => void
-    addDialogText: (message: string) => void
-    _onChange:(state: RootStoreType)=>void
+    //addPost: (message: string) => void
+    //updateNewPostText: (newText: string) => void
+    //changeDialogText: (newText: string) => void
+    //addDialogText: (message: string) => void
+    _onChange: (state: RootStoreType) => void
     subscribe: (callBack: (state: RootStoreType) => void) => void
-    getState:()=> RootStoreType
+    getState: () => RootStoreType
+    dispatch: (action: ActionType) => void
 }
 
 export const store: StoreType = {
@@ -125,7 +131,7 @@ export const store: StoreType = {
 
         }
     },
-    addPost(message: string) {
+    /*addPost(message: string) {
         console.log('addPost')
         let newPost: PostDataType = {
             id: '5',
@@ -139,8 +145,8 @@ export const store: StoreType = {
     updateNewPostText(newText: string) {
         this._state.profilePage.newPostText = newText;
         this._onChange(this._state)
-    },
-    changeDialogText(newText: string) {
+    },*/
+    /*changeDialogText(newText: string) {
         this._state.dialogsPage.newMassageText = newText;
         this._onChange(this._state)
     },
@@ -152,15 +158,54 @@ export const store: StoreType = {
         this._state.dialogsPage.messageData.push(newMessage)
         this._state.dialogsPage.newMassageText = ''
         this._onChange(this._state)
-    },
-    _onChange(){
+    },*/
+
+    _onChange() {
         console.log('State was changed !')
     },
     subscribe(observer) {
         console.log('this._onChange')
         this._onChange = observer
     },
-    getState(){
+    getState() {
         return this._state
+    },
+    dispatch(action) {
+        if (action.type === ADD_POST) {
+            let newPost: PostDataType = {
+                id: '5',
+                message: action.message,
+                likeCounter: 0
+            }
+            this._state.profilePage.postData.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._onChange(this._state)
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
+            this._state.profilePage.newPostText = action.newText;
+            this._onChange(this._state)
+        } else if (action.type === CHANGE_DIALOG_TEXT) {
+            this._state.dialogsPage.newMassageText = action.newText;
+            this._onChange(this._state)
+        } else if (action.type === ADD_DIALOG_TEXT) {
+            let newMessage: MessageType = {id: '5', message: action.message,}
+            this._state.dialogsPage.messageData.push(newMessage)
+            this._state.dialogsPage.newMassageText = ''
+            this._onChange(this._state)
+        }
+
     }
+
 }
+type AddPostType = ReturnType<typeof AddPostAC>
+export const AddPostAC = (message: string) => ({type: ADD_POST, message} as const)
+
+type UpdateNewPostTextType = ReturnType<typeof UpdateNewPostTextAC>
+export const UpdateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const)
+
+type ChangeDialogTextType = ReturnType<typeof ChangeDialogTextAC>
+export const ChangeDialogTextAC = (newText: string) => ({type: CHANGE_DIALOG_TEXT, newText} as const)
+
+type AddDialogTextType = ReturnType<typeof AddDialogTextAC>
+export const AddDialogTextAC = (message: string) => ({type: ADD_DIALOG_TEXT, message} as const)
+
+export type ActionType = AddPostType | UpdateNewPostTextType | ChangeDialogTextType | AddDialogTextType

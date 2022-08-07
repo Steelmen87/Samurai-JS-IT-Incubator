@@ -1,6 +1,7 @@
 import React, {RefObject} from "react";
 import style from './MyPosts.module.css'
 import Post from "./Post/Post";
+import {AddPostAC, UpdateNewPostTextAC} from "../../../redux/State";
 
 
 export type PostType = {
@@ -11,12 +12,13 @@ export type PostType = {
 export type PropsType = {
     postData: Array<PostType>
     newPostText: string
-    updateNewPostText: (newText: string) => void
-    addPost(postMessage: string): void
+    //updateNewPostText: (newText: string) => void
+    //addPost(postMessage: string): void
+    dispatch: (action: any) => void
 }
 
 const MyPosts = (props: PropsType) => {
-    let {postData, addPost, newPostText, updateNewPostText} = props
+    let {postData, newPostText, dispatch} = props
 
     let postElement = postData.map(el =>
         <Post
@@ -26,12 +28,14 @@ const MyPosts = (props: PropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let ButtonAddPost = () => {
-        addPost(newPostText)
+        //addPost(newPostText)
+        dispatch(AddPostAC(newPostText))
     }
     let onPostChange = () => {
 
         let text = newPostElement.current?.value
-        text && updateNewPostText(text)
+        //text && updateNewPostText(text)
+        text && dispatch(UpdateNewPostTextAC(text))
     }
     return (
         <div className={style.postsBlock}>
