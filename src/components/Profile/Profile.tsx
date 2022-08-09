@@ -1,7 +1,8 @@
 import React from "react";
 import MyPosts from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionType} from "../../redux/State";
+import {AddPostType, UpdateNewPostTextType} from "../../redux/Profile-Reducer";
+import {AddDialogTextType, ChangeDialogTextType} from "../../redux/Dialog-Reducer";
 
 type Post = {
     id: string
@@ -11,7 +12,7 @@ type Post = {
 type ProfileType = {
     postData: Array<Post>
     newPostText: string
-    dispatch: (action: ActionType) => void
+    dispatch: (action: AddPostType | UpdateNewPostTextType | ChangeDialogTextType | AddDialogTextType) => void
 }
 
 const Profile = (props: ProfileType) => {

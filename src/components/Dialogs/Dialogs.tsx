@@ -2,11 +2,19 @@ import React, {ChangeEvent} from 'react'
 import style from './Dialogs.module.css'
 import {Dialog} from "./DialogItem/Dialog";
 import Message from "./Message/Message";
-import {ActionType, AddDialogTextAC, ChangeDialogTextAC, DialogType, MessageType} from "../../redux/State";
+import { MessageType} from "../../redux/State";
+import {
+    AddDialogTextAC,
+    AddDialogTextType,
+    ChangeDialogTextAC,
+    ChangeDialogTextType,
+    DialogType
+} from "../../redux/Dialog-Reducer";
+import {AddPostType, UpdateNewPostTextType} from "../../redux/Profile-Reducer";
 
 
 type PropsDialogType = {
-    dispatch: (action: ActionType) => void
+    dispatch: (action: AddPostType | UpdateNewPostTextType | ChangeDialogTextType | AddDialogTextType) => void
     dialogData: Array<DialogType>
     messageData: Array<MessageType>
     //changeNewText(postMessage: string): void
@@ -21,6 +29,7 @@ const Dialogs = (props: PropsDialogType) => {
 
     let addMessage = () => {
        // addDialogText(message)
+
         dispatch(AddDialogTextAC(message))
 
     }

@@ -1,7 +1,7 @@
-import React, {RefObject} from "react";
+import React from "react";
 import style from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {AddPostAC, UpdateNewPostTextAC} from "../../../redux/State";
+import {AddPostAC, UpdateNewPostTextAC} from "../../../redux/Profile-Reducer";
 
 
 export type PostType = {
@@ -29,6 +29,7 @@ const MyPosts = (props: PropsType) => {
 
     let ButtonAddPost = () => {
         //addPost(newPostText)
+        if(newPostText.trim() === '')return
         dispatch(AddPostAC(newPostText))
     }
     let onPostChange = () => {
