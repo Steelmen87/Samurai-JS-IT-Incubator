@@ -3,14 +3,14 @@ import {NavLink} from "react-router-dom";
 import style from './Navbar.module.css'
 import Friend from "./Friends/Friends";
 import {FriendType} from "../../redux/State";
+import StoreContext from "../../StoreContext";
 
 
 type PropsType = {
-    friends:Array<FriendType>
+
 }
 
-const Navbar = (props:PropsType) => {
-    const{friends} = props
+const Navbar = (props: PropsType) => {
     return (
         <nav className={style.nav}>
             <div className={`${style.item}`}>
@@ -28,9 +28,16 @@ const Navbar = (props:PropsType) => {
                 <NavLink to='/settings' activeClassName={style.activeLink}>Settings</NavLink>
             </div>
             <div className={`${style.item} ${style.friends}`}>
-               {/* <NavLink to='/friends' activeClassName={style.activeLink}>*/}Friends{/*</NavLink>*/}
+                {/* <NavLink to='/friends' activeClassName={style.activeLink}>*/}Friends{/*</NavLink>*/}
             </div>
-            <Friend friends={friends}/>
+            <StoreContext.Consumer>
+                {
+                    (store) => {
+                        return <Friend friends={store.getState().sidebar.friends}/>
+                    }
+                }
+            </StoreContext.Consumer>
+
         </nav>
     )
 }

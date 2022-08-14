@@ -1,42 +1,35 @@
 import React, {ChangeEvent} from 'react'
 import style from './Dialogs.module.css'
+import {MessageType} from "../../redux/State";
+import {DialogType} from "../../redux/Dialog-Reducer";
 import {Dialog} from "./DialogItem/Dialog";
 import Message from "./Message/Message";
-import { MessageType} from "../../redux/State";
-import {
-    AddDialogTextAC,
-    AddDialogTextType,
-    ChangeDialogTextAC,
-    ChangeDialogTextType,
-    DialogType
-} from "../../redux/Dialog-Reducer";
-import {AddPostType, UpdateNewPostTextType} from "../../redux/Profile-Reducer";
+import {RootState} from "../../redux/redux-store";
 
 
 type PropsDialogType = {
-    dispatch: (action: AddPostType | UpdateNewPostTextType | ChangeDialogTextType | AddDialogTextType) => void
-    dialogData: Array<DialogType>
-    messageData: Array<MessageType>
-    //changeNewText(postMessage: string): void
-    //addDialogText(changeText: string): void
+    state: RootState
     message: string
+    changeNewText: (e: string) => void
+    addDialogText: (message: string) => void
 }
 const Dialogs = (props: PropsDialogType) => {
-    let {dialogData, messageData, dispatch, message} = props
+    const {addDialogText, changeNewText, message,state} = props
 
-    let dialogsElements = dialogData.map(el => <Dialog name={el.name} id={el.id} avatar={el.avatar}/>)
-    let messagesData = messageData.map(el => <Message message={el.message}/>)
+    const dialogsElements = state.dialogsPage.dialogData.map((el, i) =>
+        <Dialog key={i} name={el.name}
+                id={el.id}
+                avatar={el.avatar}/>)
 
-    let addMessage = () => {
-       // addDialogText(message)
+    const messagesData = state.dialogsPage.messageData.map((el, i) =>
+        <Message key={i}
+                 message={el.message}/>)
 
-        dispatch(AddDialogTextAC(message))
-
+    const addMessage = () => {
+        addDialogText(message)
     }
     const onChangeDialog = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        //changeNewText(e.currentTarget.value)
-        let text = e.currentTarget.value
-        dispatch(ChangeDialogTextAC(text))
+        changeNewText(e.currentTarget.value)
     }
     return (
         <div className={style.dialogs}>
