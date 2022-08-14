@@ -12,7 +12,14 @@ type profilePageType = {
     postData: Array<PostDataType>
     newPostText: string
 }
-export const profileReducer = (state: profilePageType, action: ActionTypeAll) => {
+const initialState = {
+    postData: [
+        {id: '1', message: 'Hi how are you ?', likeCounter: 4},
+        {id: '2', message: 'It"s my second post', likeCounter: 34},
+    ],
+    newPostText: 'it-kamasutra.com'
+}
+export const profileReducer = (state: profilePageType = initialState, action: ActionTypeAll) => {
     switch (action.type) {
         case ADD_POST:
             let newPost: PostDataType = {
@@ -22,10 +29,10 @@ export const profileReducer = (state: profilePageType, action: ActionTypeAll) =>
             }
             state.postData.push(newPost)
             state.newPostText = ''
-            return state
+            return {...state}
         case UPDATE_NEW_POST_TEXT:
             state.newPostText = action.newText;
-            return state
+            return {...state}
         default:
             return state
     }

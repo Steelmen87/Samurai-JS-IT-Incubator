@@ -22,9 +22,9 @@ const Profile = (props: ProfileType) => {
             <ProfileInfo/>
             <MyPosts
                 dispatch={dispatch}
-                //updateNewPostText={updateNewPostText}
+
                 newPostText={newPostText}
-                //addPost={addPost}
+
                 postData={postData}/>
         </div>
     )
