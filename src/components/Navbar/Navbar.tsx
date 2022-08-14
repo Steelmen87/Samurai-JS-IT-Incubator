@@ -1,8 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import style from './Navbar.module.css'
-import Friend from "./Friends/Friends";
-import {FriendType} from "../../redux/State";
+import Friends from "./Friends/Friends";
 import StoreContext from "../../StoreContext";
 
 
@@ -33,7 +32,7 @@ const Navbar = (props: PropsType) => {
             <StoreContext.Consumer>
                 {
                     (store) => {
-                        return <Friend friends={store.getState().sidebar.friends}/>
+                        return <Friends friends={store.getState().sidebar.friends}/>
                     }
                 }
             </StoreContext.Consumer>

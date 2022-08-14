@@ -1,6 +1,7 @@
 import React from 'react'
 import Friend from './Friend/Friend';
 import style from './Friends.module.css'
+
 type FriendType = {
     id: string
     name: string
@@ -14,7 +15,7 @@ const Friends = (props: FriendPropsType) => {
     const {friends} = props;
     return (
         <div className={style.friendFlex}>
-            {friends.map(f => <Friend state={f}/>)}
+            {friends.map(f => <Friend key={f.id + f.name} state={f}/>)}
         </div>
     )
 }

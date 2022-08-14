@@ -6,7 +6,8 @@ import {HashRouter} from "react-router-dom";
 import store, {RootState} from "./redux/redux-store";
 import {Provider} from "./StoreContext";
 
-let rerenderEntireTree = (state: RootState) => {
+const rerenderEntireTree = (state: RootState) => {
+
     ReactDOM.render(
         <HashRouter>
             <Provider store={store}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import style from './MyPosts.module.css'
 import Post from "./Post/Post";
 
@@ -16,22 +16,21 @@ export type PropsType = {
 }
 
 const MyPosts = (props: PropsType) => {
-    let {postData, newPostText, addPost,updateNewPostText} = props
+    let {postData, newPostText, addPost, updateNewPostText} = props
 
     let postElement = postData.map(el =>
-        <Post
-            message={el.message}
-            likeCounter={el.likeCounter}
+        <Post key={el.id + el.message}
+              message={el.message}
+              likeCounter={el.likeCounter}
         />)
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let ButtonAddPost = () => {
-        if(newPostText.trim() === '')return
+        if (newPostText.trim() === '') return
         addPost(newPostText)
 
     }
-    let onPostChange = () => {
-        let text = newPostElement.current?.value
+    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let text = e.currentTarget.value
         text && updateNewPostText(text)
 
     }
@@ -39,17 +38,11 @@ const MyPosts = (props: PropsType) => {
         <div className={style.postsBlock}>
             <h3>My post</h3>
             <div>
-                <textarea
-                    value={newPostText}
-                    onChange={onPostChange}
-                    ref={newPostElement}
-                />
+                <textarea value={newPostText} onChange={onPostChange}/>
                 <br/>
                 <button onClick={ButtonAddPost}>Add post</button>
             </div>
-            <div className={style.posts}>
-                {postElement}
-            </div>
+            <div className={style.posts}>{postElement}</div>
         </div>
 
     )
