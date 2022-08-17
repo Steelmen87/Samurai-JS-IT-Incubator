@@ -1,6 +1,5 @@
-import {AddPostType, PostDataType, profileReducer, UpdateNewPostTextType} from "./Profile-Reducer";
-import {AddDialogTextType, ChangeDialogTextType, dialogReducer, DialogType} from "./Dialog-Reducer";
-import {sidebarReducer} from "./Sidebar-Reducer";
+import {AddPostType, PostDataType, UpdateNewPostTextType} from "./Profile-Reducer";
+import {AddDialogTextType, ChangeDialogTextType, DialogType} from "./Dialog-Reducer";
 
 export type ActionTypeAll = UpdateNewPostTextType|AddPostType|AddDialogTextType|ChangeDialogTextType
 export type MessageType = {
@@ -43,7 +42,7 @@ export type StoreType = {
     dispatch: (action: ActionTypeAll) => void
 }
 
-export const store: StoreType = {
+/*export const store: StoreType = {
     _state: {
         profilePage: {
             postData: [
@@ -134,7 +133,7 @@ export const store: StoreType = {
         this._onChange(this._state)
     }
 
-}
+}*/
 
 
 

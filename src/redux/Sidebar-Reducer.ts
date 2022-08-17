@@ -1,5 +1,8 @@
-import {FriendType} from "./State";
-
+export type FriendType = {
+    id: string
+    name: string
+    avatar: string
+}
 const initialState = {
     friends: [
         {
@@ -34,7 +37,7 @@ const initialState = {
 type sidebarType = {
     friends: Array<FriendType>
 }
-export const sidebarReducer = (state: sidebarType = initialState, action: any) => {
+export const sidebarReducer = (state: sidebarType = initialState, action: any): sidebarType => {
 
     return state
 }

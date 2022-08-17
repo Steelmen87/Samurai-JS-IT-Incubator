@@ -7,7 +7,7 @@ type FriendType = {
     name: string
     avatar: string
 }
-type FriendPropsType = {
+export type FriendPropsType = {
     friends: Array<FriendType>
 }
 
