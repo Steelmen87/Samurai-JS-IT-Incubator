@@ -4,9 +4,7 @@ import FriendsContainer from "./Friends/FriendsContainer";
 import style from './Navbar.module.css'
 
 
-type PropsType = {
-
-}
+type PropsType = {}
 
 const Navbar = (props: PropsType) => {
     return (
@@ -16,6 +14,10 @@ const Navbar = (props: PropsType) => {
             <div className={style.item}>
                 <NavLink to='/dialogs' activeClassName={style.activeLink}>Message</NavLink>
             </div>
+            <div className={style.item}>
+                <NavLink to='/users' activeClassName={style.activeLink}>Users</NavLink>
+            </div>
+
             <div className={style.item}>
                 <NavLink to='/new' activeClassName={style.activeLink}>New</NavLink>
             </div>
@@ -28,7 +30,7 @@ const Navbar = (props: PropsType) => {
             <div className={`${style.item} ${style.friends}`}>
                 {/* <NavLink to='/friends' activeClassName={style.activeLink}>*/}Friends{/*</NavLink>*/}
             </div>
-            <FriendsContainer />
+            <FriendsContainer/>
         </nav>
     )
 }
