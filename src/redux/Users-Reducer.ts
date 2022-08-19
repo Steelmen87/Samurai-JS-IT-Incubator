@@ -8,7 +8,7 @@ const SET_USERS = 'SET_USERS';
 type locationType = {
     city: string, country: string
 }
-type User = {
+export type UserType = {
     id: string
     photoUrl: string
     followed: boolean
@@ -16,39 +16,14 @@ type User = {
     status: string
     location: locationType
 }
-export type usersType = {
-    users: Array<User>
+export type initialStateType = {
+    users: Array<UserType>
 }
 const initialState = {
-    users: [
-       /* {
-            id: '1',
-            photoUrl: 'http://8tv.ru/upload/iblock/d06/d06a9ad14b4d050657c2b45f0f3c7d40.jpg',
-            followed: true,
-            fullName: 'Dmotriy',
-            status: 'I am boss',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: '2',
-            photoUrl: 'http://8tv.ru/upload/iblock/d06/d06a9ad14b4d050657c2b45f0f3c7d40.jpg',
-            followed: false,
-            fullName: 'Ivan',
-            status: 'I am  2',
-            location: {city: 'Moscow', country: 'Rus'}
-        },
-        {
-            id: '3',
-            photoUrl: 'http://8tv.ru/upload/iblock/d06/d06a9ad14b4d050657c2b45f0f3c7d40.jpg',
-            followed: true,
-            fullName: 'Kolia',
-            status: 'I am 3',
-            location: {city: 'Kiev', country: 'Uk'}
-        },*/
-    ],
+    users: []
 
 }
-export const usersReducer = (state: usersType = initialState, action: ActionTypeAll) => {
+export const usersReducer = (state: initialStateType = initialState, action: ActionTypeAll): initialStateType => {
     debugger
     switch (action.type) {
         case 'FOLLOW':

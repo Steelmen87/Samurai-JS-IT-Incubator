@@ -30,14 +30,11 @@ const initialState = {
             name: 'Vlad',
             avatar: 'https://avatars.mds.yandex.net/i?id=56c28fdf329d24378e1afc0f16f3ccc9-4034590-images-thumbs&n=13',
         },
-    ]
-
-
+    ]as Array<FriendType>
 }
-type sidebarType = {
-    friends: Array<FriendType>
-}
-export const sidebarReducer = (state: sidebarType = initialState, action: any): sidebarType => {
 
+export type initialStateType = typeof initialState
+
+export const sidebarReducer = (state: initialStateType = initialState, action: any): initialStateType => {
     return state
 }

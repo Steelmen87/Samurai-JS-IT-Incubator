@@ -8,18 +8,16 @@ export type PostDataType = {
     message: string
     likeCounter: number
 }
-export type profilePageType = {
-    postData: Array<PostDataType>
-    newPostText: string
-}
 const initialState = {
     postData: [
         {id: '1', message: 'Hi how are you ?', likeCounter: 4},
         {id: '2', message: 'It"s my second post', likeCounter: 34},
-    ],
+    ] as Array<PostDataType>,
     newPostText: 'it-kamasutra.com'
 }
-export const profileReducer = (state: profilePageType = initialState, action: ActionTypeAll) => {
+export type profilePageType = typeof initialState
+
+export const profileReducer = (state: profilePageType = initialState, action: ActionTypeAll): profilePageType => {
     switch (action.type) {
         case ADD_POST:
             let newPost: PostDataType = {

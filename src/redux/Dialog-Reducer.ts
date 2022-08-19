@@ -12,11 +12,11 @@ type MessageType = {
     id: string
     message: string
 }
-export type dialogsPageType = {
+/*export type dialogsPageType = {
     messageData: Array<MessageType>
-    dialogData: Array<DialogType>
+    dialogsData: Array<DialogType>
     newMassageText: string
-}
+}*/
 const initialState = {
     messageData: [
         {id: '1', message: 'Hi'},
@@ -24,9 +24,9 @@ const initialState = {
         {id: '3', message: 'Yo yO'},
         {id: '4', message: 'Yo yO1'},
         {id: '5', message: 'Yo yO2'},
-    ],
+    ] as Array<MessageType>,
     newMassageText: 'Dialog text',
-    dialogData: [
+    dialogsData: [
         {
             name: "Dimych", id: '1',
             avatar: 'https://avatars.mds.yandex.net/i?id=6cd69ff70cc480826905181d80007878-5356799-images-thumbs&n=13'
@@ -47,9 +47,11 @@ const initialState = {
             name: "Viktor!", id: '5',
             avatar: 'https://avatars.mds.yandex.net/i?id=6cd69ff70cc480826905181d80007878-5356799-images-thumbs&n=13'
         },
-    ],
+    ] as Array<DialogType>,
 }
-export const dialogReducer = (state: dialogsPageType = initialState, action: ActionTypeAll) => {
+export type initialStateType = typeof initialState
+
+export const dialogReducer = (state: initialStateType = initialState, action: ActionTypeAll): initialStateType => {
     switch (action.type) {
         case CHANGE_DIALOG_TEXT:
             return {
@@ -58,7 +60,7 @@ export const dialogReducer = (state: dialogsPageType = initialState, action: Act
             }
         case ADD_DIALOG_TEXT:
             let newMessage: MessageType = {id: '6', message: action.message}
-             return {
+            return {
                 ...state,
                 messageData: [...state.messageData, newMessage],
                 newMassageText: ''

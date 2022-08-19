@@ -1,12 +1,14 @@
 import React from 'react';
 import styles from './Users.module.css'
+import {UserType} from "../../redux/Users-Reducer";
+
 
 
 type PropsType = {
-    users: any
+    users: Array<UserType>
     follow: (id: string) => void
     unfollow: (id: string) => void
-    setUsers: (users: any) => void
+    setUsers: (users: Array<UserType>) => void
 }
 
 const Users = (props: PropsType) => {
