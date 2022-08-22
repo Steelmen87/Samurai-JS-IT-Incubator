@@ -8,7 +8,7 @@ const SET_USERS = 'SET_USERS';
 type locationType = {
     city: string, country: string
 }
-type User = {
+export type User = {
     id: string
     photoUrl: string
     followed: boolean
@@ -54,12 +54,12 @@ export const usersReducer = (state: usersType = initialState, action: ActionType
         case 'FOLLOW':
             return {
                 ...state,
-                users: state.users.map(u => u.id == action.id ? {...u, followed: true} : u)
+                users: state.users.map(u => u.id === action.id ? {...u, followed: true} : u)
             }
         case 'UNFOLLOW':
             return {
                 ...state,
-                users: state.users.map(u => u.id == action.id ? {...u, followed: false} : u)
+                users: state.users.map(u => u.id === action.id ? {...u, followed: false} : u)
             }
         case 'SET_USERS':
             return { ...state, users: [ ...state.users, ...action.users ]}

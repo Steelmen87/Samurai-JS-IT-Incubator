@@ -1,32 +1,41 @@
-import React from 'react'
-
 import {connect} from "react-redux";
-import {RootState} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 import Users from "./Users";
-import {followAC, setUsersAC, unfollowAC} from "../../redux/Users-Reducer";
+import {followAC, setUsersAC, unfollowAC, User} from "../../redux/Users-Reducer";
+import {Dispatch} from "redux";
 
 export type UserType = {
     id: string
     name: string
     status: string
-    photos:{
-        small:string
-        large:string
+    photos: {
+        small: string
+        large: string
     }
-    followed:boolean
+    followed: boolean
 }
 
 export type ResponseDatatype = {
     items: UserType
-    totalCount:number
-    error:string
+    totalCount: number
+    error: string
 }
-const mapStateToProps = (state: RootState) => {
+export type MapStateToPropsType = {
+    users: Array<User>
+}
+
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         users: state.usersPage.users
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
+
+export type mapDispatchToPropsType = {
+    follow: (id: string) => void
+    unfollow: (id: string) => void
+    setUsers: (users: ResponseDatatype) => void
+}
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         follow: (id: string) => {
 
@@ -43,7 +52,6 @@ const mapDispatchToProps = (dispatch: any) => {
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Users)
-
 
 
 
