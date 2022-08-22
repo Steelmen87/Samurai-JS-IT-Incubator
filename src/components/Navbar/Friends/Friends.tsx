@@ -1,21 +1,17 @@
 import React from 'react'
 import Friend from './Friend/Friend';
 import style from './Friends.module.css'
+import {initialStateType} from "../../../redux/Sidebar-Reducer";
 
-type FriendType = {
-    id: string
-    name: string
-    avatar: string
-}
 export type FriendPropsType = {
-    friends: Array<FriendType>
+    sidebar: initialStateType
 }
 
 const Friends = (props: FriendPropsType) => {
-    const {friends} = props;
+    const {sidebar} = props;
     return (
         <div className={style.friendFlex}>
-            {friends.map(f => <Friend key={f.id + f.name} state={f}/>)}
+            {sidebar.friends.map(f => <Friend key={f.id + f.name} state={f}/>)}
         </div>
     )
 }
