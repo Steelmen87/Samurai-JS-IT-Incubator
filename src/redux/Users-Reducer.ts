@@ -49,7 +49,7 @@ const initialState = {
 
 }
 export const usersReducer = (state: usersType = initialState, action: ActionTypeAll) => {
-    debugger
+
     switch (action.type) {
         case 'FOLLOW':
             return {
@@ -62,10 +62,7 @@ export const usersReducer = (state: usersType = initialState, action: ActionType
                 users: state.users.map(u => u.id == action.id ? {...u, followed: false} : u)
             }
         case 'SET_USERS':
-            return {
-                ...state,
-                users: [...state.users, ...action.users]
-            }
+            return { ...state, users: [ ...state.users, ...action.users ]}
         default:
             return state;
     }
