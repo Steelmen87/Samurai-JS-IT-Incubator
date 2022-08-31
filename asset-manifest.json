@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Samurai-JS-IT-Incubator/static/css/main.9b9f09a8.css",
-    "main.js": "/Samurai-JS-IT-Incubator/static/js/main.994e00d9.js",
+    "main.css": "/Samurai-JS-IT-Incubator/static/css/main.5646c4ef.css",
+    "main.js": "/Samurai-JS-IT-Incubator/static/js/main.3e58117e.js",
     "index.html": "/Samurai-JS-IT-Incubator/index.html",
-    "main.9b9f09a8.css.map": "/Samurai-JS-IT-Incubator/static/css/main.9b9f09a8.css.map",
-    "main.994e00d9.js.map": "/Samurai-JS-IT-Incubator/static/js/main.994e00d9.js.map"
+    "main.5646c4ef.css.map": "/Samurai-JS-IT-Incubator/static/css/main.5646c4ef.css.map",
+    "main.3e58117e.js.map": "/Samurai-JS-IT-Incubator/static/js/main.3e58117e.js.map"
   },
   "entrypoints": [
-    "static/css/main.9b9f09a8.css",
-    "static/js/main.994e00d9.js"
+    "static/css/main.5646c4ef.css",
+    "static/js/main.3e58117e.js"
   ]
 }
