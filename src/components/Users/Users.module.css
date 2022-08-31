@@ -2,3 +2,11 @@
     width: 100px;
     border-radius: 50%;
 }
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+.selectedPage{
+    font-weight: 700;
+
+}

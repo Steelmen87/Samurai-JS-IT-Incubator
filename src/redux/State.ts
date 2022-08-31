@@ -1,6 +1,12 @@
 import {AddPostType, UpdateNewPostTextType} from "./Profile-Reducer";
 import {AddDialogTextType, ChangeDialogTextType} from "./Dialog-Reducer";
-import {followACType, setUsersACType, unfollowACType} from "./Users-Reducer";
+import {
+    followACType,
+    setCurrentPageACType,
+    setTotalUsersCountACType,
+    setUsersACType,
+    unfollowACType
+} from "./Users-Reducer";
 
 export type ActionTypeAll = UpdateNewPostTextType
     | AddPostType
@@ -9,6 +15,8 @@ export type ActionTypeAll = UpdateNewPostTextType
     | followACType
     | unfollowACType
     | setUsersACType
+    | setCurrentPageACType
+    | setTotalUsersCountACType
 
 export type MessageType = {
     id: string
