@@ -13,7 +13,6 @@ import axios from "axios";
 import Users from "./Users";
 import {connect} from "react-redux";
 import Preloader from "../common/Preloader/Preloader";
-
 export type UserType = {
     id: string
     name: string
