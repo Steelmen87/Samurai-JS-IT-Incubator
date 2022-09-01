@@ -1,14 +1,13 @@
 import {AppStateType} from "../../redux/redux-store";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setToggleIsFetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow,
     User
 } from "../../redux/Users-Reducer";
-import {Dispatch} from "redux";
 import React from "react";
 import axios from "axios";
 import Users from "./Users";
@@ -47,7 +46,6 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         isFetching: state.usersPage.isFetching
     }
 }
-
 export type mapDispatchToPropsType = {
     follow: (id: string) => void
     unfollow: (id: string) => void
@@ -56,28 +54,7 @@ export type mapDispatchToPropsType = {
     setTotalUsersCount: (total: number) => void
     setToggleIsFetching: (isFetching: boolean) => void
 }
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-    return {
-        follow: (id: string) => {
-            dispatch(followAC(id))
-        },
-        unfollow: (id: string) => {
-            dispatch(unfollowAC(id))
-        },
-        setUsers: (users: ResponseDatatype) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (page: number) => {
-            dispatch(setCurrentPageAC(page))
-        },
-        setTotalUsersCount: (total: number) => {
-            dispatch(setTotalUsersCountAC(total))
-        },
-        setToggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-}
+
 
 type propsType = UserType[] & MapStateToPropsType & mapDispatchToPropsType
 
@@ -129,7 +106,16 @@ class UsersContainer extends React.Component<propsType | any> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps,
+    {
+        follow,
+        unfollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUsersCount,
+        setToggleIsFetching
+    }
+)(UsersContainer)
 
 
 
