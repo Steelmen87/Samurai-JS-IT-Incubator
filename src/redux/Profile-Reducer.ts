@@ -34,14 +34,15 @@ export const profileReducer = (state: profilePageType = initialState, action: Ac
                 postData: [newPost, ...state.postData],
                 newPostText: ''
             }
-        case UPDATE_NEW_POST_TEXT:
+        case  UPDATE_NEW_POST_TEXT:
             return {
                 ...state,
                 newPostText: action.newText
             }
         case "SET_USER_PROFILE":
             return {
-                ...state, profile: action.profile
+                ...state,
+                profile: action.profile
             }
         default:
             return state
@@ -52,6 +53,7 @@ export type AddPostType = ReturnType<typeof AddPostAC>
 export const AddPostAC = (message: string) => ({type: ADD_POST, message} as const)
 
 export type setUserProfileType = ReturnType<typeof setUserProfile>
+
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile} as const)
 
 export type UpdateNewPostTextType = ReturnType<typeof UpdateNewPostTextAC>

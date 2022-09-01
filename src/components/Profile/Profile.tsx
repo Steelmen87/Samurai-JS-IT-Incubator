@@ -10,7 +10,6 @@ const Profile = (props: ProfileType) => {
     debugger
     return (
         <div>
-
             <ProfileInfo profile={props.profile}/>
             <MyPostsContainer/>
         </div>
