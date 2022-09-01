@@ -1,10 +1,10 @@
-import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
     followAC,
     setCurrentPageAC,
     setTotalUsersCountAC,
     setUsersAC,
+    toggleIsFetchingAC,
     unfollowAC,
     User
 } from "../../redux/Users-Reducer";
@@ -12,6 +12,8 @@ import {Dispatch} from "redux";
 import React from "react";
 import axios from "axios";
 import Users from "./Users";
+import {connect} from "react-redux";
+import Preloader from "../common/Preloader/Preloader";
 
 export type UserType = {
     id: string
@@ -31,16 +33,18 @@ export type ResponseDatatype = {
 export type MapStateToPropsType = {
     users: Array<User>
     totalCount: number
-    pageSize:number
-    currentPage:number
+    pageSize: number
+    currentPage: number
+    isFetching: boolean
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         users: state.usersPage.users,
-        pageSize:state.usersPage.pageSize,
-        totalCount:state.usersPage.totalUsersCount,
-        currentPage:state.usersPage.currentPage,
+        pageSize: state.usersPage.pageSize,
+        totalCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 
@@ -50,6 +54,7 @@ export type mapDispatchToPropsType = {
     setUsers: (users: ResponseDatatype) => void
     setCurrentPage: (page: number) => void
     setTotalUsersCount: (total: number) => void
+    setToggleIsFetching: (isFetching: boolean) => void
 }
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
@@ -62,11 +67,14 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
         setUsers: (users: ResponseDatatype) => {
             dispatch(setUsersAC(users))
         },
-        setCurrentPage: (page:number) => {
+        setCurrentPage: (page: number) => {
             dispatch(setCurrentPageAC(page))
         },
-        setTotalUsersCount: (total:number) => {
+        setTotalUsersCount: (total: number) => {
             dispatch(setTotalUsersCountAC(total))
+        },
+        setToggleIsFetching: (isFetching: boolean) => {
+            dispatch(toggleIsFetchingAC(isFetching))
         }
     }
 }
@@ -76,8 +84,10 @@ type propsType = UserType[] & MapStateToPropsType & mapDispatchToPropsType
 class UsersContainer extends React.Component<propsType | any> {
 
     componentDidMount() {
+        this.props.setToggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(res => {
+                this.props.setToggleIsFetching(false)
                 this.props.setUsers(res.data.items)
                 this.props.setTotalUsersCount(res.data.totalCount)
             })
@@ -91,29 +101,34 @@ class UsersContainer extends React.Component<propsType | any> {
     }
 
     onClickPageChanged = (page: number) => {
-        debugger
+        this.props.setToggleIsFetching(true)
         this.props.setCurrentPage(page)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
             .then(res => {
                 this.props.setUsers(res.data.items)
+                this.props.setToggleIsFetching(false)
             })
     }
 
     render() {
 
         return (
-            <Users
-                users={this.props.users}
-                onClickPageChanged={this.onClickPageChanged}
-                onFollowHandler={this.onFollowHandler}
-                onUnFollowHandler={this.onUnFollowHandler}
-                totalCount={this.props.totalCount}
-                currentPage={this.props.currentPage}
-                pageSize={this.props.pageSize}
-            />
+            <div>
+                {this.props.isFetching ? <Preloader/> : null}
+                <Users
+                    users={this.props.users}
+                    onClickPageChanged={this.onClickPageChanged}
+                    onFollowHandler={this.onFollowHandler}
+                    onUnFollowHandler={this.onUnFollowHandler}
+                    totalCount={this.props.totalCount}
+                    currentPage={this.props.currentPage}
+                    pageSize={this.props.pageSize}
+                />
+            </div>
         );
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
 
 

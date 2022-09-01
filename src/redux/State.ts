@@ -4,7 +4,7 @@ import {
     followACType,
     setCurrentPageACType,
     setTotalUsersCountACType,
-    setUsersACType,
+    setUsersACType, toggleIsFetchingType,
     unfollowACType
 } from "./Users-Reducer";
 
@@ -17,6 +17,7 @@ export type ActionTypeAll = UpdateNewPostTextType
     | setUsersACType
     | setCurrentPageACType
     | setTotalUsersCountACType
+    | toggleIsFetchingType
 
 export type MessageType = {
     id: string
