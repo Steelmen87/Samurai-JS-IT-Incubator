@@ -87,5 +87,5 @@ export type unfollowACType = ReturnType<typeof unfollow>
 export const unfollow = (id: string) => ({type: UNFOLLOW, id} as const)
 
 export type setUsersACType = ReturnType<typeof setUsers>
-export const setUsers = (users: any) => ({type: SET_USERS, users} as const)
+export const setUsers = (users: Array<User>) => ({type: SET_USERS, users} as const)
 

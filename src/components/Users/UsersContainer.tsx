@@ -13,6 +13,8 @@ import axios from "axios";
 import Users from "./Users";
 import {connect} from "react-redux";
 import Preloader from "../common/Preloader/Preloader";
+import {ActionTypeAll} from "../../redux/State";
+
 export type UserType = {
     id: string
     name: string
@@ -24,7 +26,7 @@ export type UserType = {
     followed: boolean
 }
 export type ResponseDatatype = {
-    items: UserType
+    items: UserType[]
     totalCount: number
     error: string
 }
@@ -54,10 +56,9 @@ export type mapDispatchToPropsType = {
     setToggleIsFetching: (isFetching: boolean) => void
 }
 
+type propsType = ActionTypeAll & MapStateToPropsType & mapDispatchToPropsType
 
-type propsType = UserType[] & MapStateToPropsType & mapDispatchToPropsType
-
-class UsersContainer extends React.Component<propsType | any> {
+class UsersContainer extends React.Component<any> {
 
     componentDidMount() {
         this.props.setToggleIsFetching(true)
