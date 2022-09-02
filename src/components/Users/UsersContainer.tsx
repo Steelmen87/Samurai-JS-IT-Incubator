@@ -5,8 +5,7 @@ import {
     setToggleIsFetching,
     setTotalUsersCount,
     setUsers,
-    unfollow,
-    User
+    unfollow, UsersType
 } from "../../redux/Users-Reducer";
 import React from "react";
 import axios from "axios";
@@ -30,19 +29,19 @@ export type ResponseDatatype = {
     totalCount: number
     error: string
 }
-export type MapStateToPropsType = {
-    users: Array<User>
+/*export type MapStateToPropsType = {
+    users: UsersType
     totalCount: number
     pageSize: number
     currentPage: number
     isFetching: boolean
-}
+}*/
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppStateType): UsersType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalUsersCount,
+        totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching
     }
@@ -56,7 +55,14 @@ export type mapDispatchToPropsType = {
     setToggleIsFetching: (isFetching: boolean) => void
 }
 
-type propsType = ActionTypeAll & MapStateToPropsType & mapDispatchToPropsType
+type propsType = ActionTypeAll & UsersType & mapDispatchToPropsType
+type StateType = {
+    // описываем локальный стейт
+    users: Array<UserType>
+    onFollowHandler: (id: string) => void
+    onUnFollowHandler: (id: string) => void
+    onClickPageChanged: (page: number) => void
+}
 
 class UsersContainer extends React.Component<any> {
 
@@ -88,7 +94,6 @@ class UsersContainer extends React.Component<any> {
     }
 
     render() {
-
         return (
             <div>
                 {this.props.isFetching ? <Preloader/> : null}
@@ -97,7 +102,7 @@ class UsersContainer extends React.Component<any> {
                     onClickPageChanged={this.onClickPageChanged}
                     onFollowHandler={this.onFollowHandler}
                     onUnFollowHandler={this.onUnFollowHandler}
-                    totalCount={this.props.totalCount}
+                    totalCount={this.props.totalUsersCount}
                     currentPage={this.props.currentPage}
                     pageSize={this.props.pageSize}
                 />

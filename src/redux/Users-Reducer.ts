@@ -1,4 +1,5 @@
 import {ActionTypeAll} from "./State";
+import {UserType} from "../components/Users/UsersContainer";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -8,7 +9,7 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 
-type locationType = {
+/*type locationType = {
     city: string, country: string
 }
 export type User = {
@@ -19,9 +20,9 @@ export type User = {
     status: string
     location: locationType
 
-}
-export type usersType = {
-    users: Array<User>
+}*/
+export type UsersType = {
+    users: Array<UserType>
     totalUsersCount: number
     pageSize: number
     currentPage: number
@@ -34,8 +35,7 @@ const initialState = {
     currentPage: 1,
     isFetching: true
 }
-export const usersReducer = (state: usersType = initialState, action: ActionTypeAll) => {
-
+export const usersReducer = (state: UsersType = initialState, action: ActionTypeAll) => {
     switch (action.type) {
         case 'FOLLOW':
             return {
@@ -87,5 +87,5 @@ export type unfollowACType = ReturnType<typeof unfollow>
 export const unfollow = (id: string) => ({type: UNFOLLOW, id} as const)
 
 export type setUsersACType = ReturnType<typeof setUsers>
-export const setUsers = (users: Array<User>) => ({type: SET_USERS, users} as const)
+export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users} as const)
 
