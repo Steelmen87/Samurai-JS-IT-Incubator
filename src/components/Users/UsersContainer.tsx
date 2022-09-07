@@ -13,7 +13,7 @@ import Users from "./Users";
 import {connect} from "react-redux";
 import Preloader from "../common/Preloader/Preloader";
 import {ActionTypeAll} from "../../redux/State";
-import {instance} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 export type UserType = {
     id: string
@@ -69,11 +69,12 @@ class UsersContainer extends React.Component<any> {
 
     componentDidMount() {
         this.props.setToggleIsFetching(true)
-        instance.get(`users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(res => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            /*instance.get(`users?page=${this.props.currentPage}&count=${this.props.pageSize}`)*/
+            .then(data => {
                 this.props.setToggleIsFetching(false)
-                this.props.setUsers(res.data.items)
-                this.props.setTotalUsersCount(res.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
             })
     }
 
@@ -87,9 +88,10 @@ class UsersContainer extends React.Component<any> {
     onClickPageChanged = (page: number) => {
         this.props.setToggleIsFetching(true)
         this.props.setCurrentPage(page)
-        instance.get(`users?page=${page}&count=${this.props.pageSize}`)
-            .then(res => {
-                this.props.setUsers(res.data.items)
+        /*instance.get(`users?page=${page}&count=${this.props.pageSize}`)*/
+        usersAPI.getUsers(page, this.props.pageSize)
+            .then(data => {
+                this.props.setUsers(data.items)
                 this.props.setToggleIsFetching(false)
             })
     }

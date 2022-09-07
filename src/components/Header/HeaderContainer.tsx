@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
 import {setUserData, setUserDataType} from "../../redux/header-Reducer";
-import {instance} from "../../api/api";
+import {usersAPI} from "../../api/api";
 import {AppStateType} from "../../redux/redux-store";
 
 type propsType = mapStateToPropsType & setUserDataType
@@ -21,13 +21,20 @@ class HeaderContainer extends React.Component<propsType | any> {
      }*/
 
     componentDidMount() {
-        instance.get('auth/me')
+        usersAPI.me()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    const {id, email, login} = data.data
+                    this.props.setUserData(id, email, login)
+                }
+            })
+        /*instance.get('auth/me')
             .then(response => {
                 if (response.data.resultCode === 0) {
                     const {id, email, login} = response.data.data
                     this.props.setUserData(id, email, login)
                 }
-            })
+            })*/
     }
 
     render() {

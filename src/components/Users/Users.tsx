@@ -3,7 +3,7 @@ import styles from "./Users.module.css";
 import {UserType} from "./UsersContainer";
 import userPhoto from "../../img/v211103.jpg";
 import {NavLink} from 'react-router-dom';
-import {instance} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 type propsType = {
     users: Array<UserType>
@@ -49,17 +49,17 @@ const Users = (props: propsType) => {
                     <div>
                         {u.followed
                             ? <button onClick={() => {
-                                instance.delete(`follow/${u.id}`)
-                                    .then(res => {
-                                        if (res.data.resultCode === 0) {
+                                usersAPI.follow(u.id)
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
                                             onUnFollowHandler(u.id)
                                         }
                                     })
                             }}>Unfollow</button>
                             : <button onClick={() => {
-                                instance.post(`follow/${u.id}`)
-                                    .then(res => {
-                                        if (res.data.resultCode === 0) {
+                                usersAPI.unFollow(u.id)
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
                                             onFollowHandler(u.id)
                                         }
                                     })
