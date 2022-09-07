@@ -2,7 +2,8 @@ import React from 'react';
 import styles from "./Users.module.css";
 import {UserType} from "./UsersContainer";
 import userPhoto from "../../img/v211103.jpg";
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
+import {instance} from "../../api/api";
 
 type propsType = {
     users: Array<UserType>
@@ -28,11 +29,11 @@ const Users = (props: propsType) => {
     return (
         <div>
             <div className={styles.flex}>
-                {arrayPagesCount.map((p,i) => {
+                {arrayPagesCount.map((p, i) => {
                     return <span
                         onClick={() => onClickPageChanged(p)}
                         className={currentPage == p ? styles.selectedPage : ''}
-                        key={p+i}>{p}#
+                        key={p + i}>{p}#
                         </span>
 
                 })}
@@ -40,14 +41,29 @@ const Users = (props: propsType) => {
             {users.map((u: UserType) => <div key={u.id}>
                 <span>
                     <div>
-                        <NavLink to={`/profile/${u.id}`}> <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={styles.photoUser}
-                             alt=''/>
+                        <NavLink to={`/profile/${u.id}`}> <img
+                            src={u.photos.small !== null ? u.photos.small : userPhoto} className={styles.photoUser}
+                            alt=''/>
                         </NavLink>
                     </div>
                     <div>
                         {u.followed
-                            ? <button onClick={() => onUnFollowHandler(u.id)}>Follow</button>
-                            : <button onClick={() => onFollowHandler(u.id)}>Unfollow</button>
+                            ? <button onClick={() => {
+                                instance.delete(`follow/${u.id}`)
+                                    .then(res => {
+                                        if (res.data.resultCode === 0) {
+                                            onUnFollowHandler(u.id)
+                                        }
+                                    })
+                            }}>Unfollow</button>
+                            : <button onClick={() => {
+                                instance.post(`follow/${u.id}`)
+                                    .then(res => {
+                                        if (res.data.resultCode === 0) {
+                                            onFollowHandler(u.id)
+                                        }
+                                    })
+                            }}>Follow</button>
                         }
                     </div>
                 </span>

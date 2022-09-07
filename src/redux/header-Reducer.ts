@@ -2,7 +2,6 @@ import {ActionTypeAll} from "./State";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
-
 export type initialState = {
     id: string | null,
     email: string | null,
@@ -28,11 +27,9 @@ export const authReducer = (state: initialState = initialState, action: ActionTy
         default:
             return state;
     }
-
 }
 
 export type setUserDataType = ReturnType<typeof setUserData>
-
 export const setUserData = (id: string, email: string, login: string) => ({
     type: SET_USER_DATA,
     payload: {id, email, login}

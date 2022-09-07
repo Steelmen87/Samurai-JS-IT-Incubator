@@ -7,7 +7,6 @@ type ProfileType = {
     profile: profileType
 }
 const Profile = (props: ProfileType) => {
-    debugger
     return (
         <div>
             <ProfileInfo profile={props.profile}/>
