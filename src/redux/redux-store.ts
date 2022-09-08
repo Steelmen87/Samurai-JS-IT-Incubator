@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
     dialogsPage: dialogReducer,
     usersPage: usersReducer,
     sidebar: sidebarReducer,
-    auth:authReducer
+    auth: authReducer
 })
 
 let store = createStore(rootReducer)

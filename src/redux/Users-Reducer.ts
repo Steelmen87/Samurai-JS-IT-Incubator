@@ -1,5 +1,4 @@
 import {ActionTypeAll} from "./State";
-import {UserType} from "../components/Users/UsersContainer";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -7,33 +6,34 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 
-/*type locationType = {
-    city: string, country: string
-}
-export type User = {
+export type UserType = {
     id: string
-    photoUrl: string
-    followed: boolean
-    fullName: string
+    name: string
     status: string
-    location: locationType
-
-}*/
+    photos: {
+        small: string
+        large: string
+    }
+    followed: boolean
+}
 export type UsersType = {
-    users: Array<UserType>
+    users: UserType[]
     totalUsersCount: number
     pageSize: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: string[]
 }
 const initialState = {
     users: [],
     totalUsersCount: 0,
     pageSize: 10,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: []
 }
 export const usersReducer = (state: UsersType = initialState, action: ActionTypeAll) => {
     switch (action.type) {
@@ -64,11 +64,25 @@ export const usersReducer = (state: UsersType = initialState, action: ActionType
                 ...state,
                 isFetching: action.isFetching
             }
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.isFetching ?
+                    [...state.followingInProgress,action.id]
+                    : state.followingInProgress.filter(id => id !== action.id)
+            }
         default:
             return state;
     }
 
 }
+
+export type followIsProgressType = ReturnType<typeof toggleFollowIsProgress>
+export const toggleFollowIsProgress = (isFetching: boolean,id: string) => ({
+    type: TOGGLE_IS_FOLLOWING_PROGRESS,
+    isFetching
+    ,id
+} as const)
 
 export type followACType = ReturnType<typeof follow>
 export const follow = (id: string) => ({type: FOLLOW, id} as const)
