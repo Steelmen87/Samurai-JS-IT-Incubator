@@ -1,12 +1,9 @@
 import React, {useEffect} from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {setUserProfile, setUserProfileType} from "../../redux/Profile-Reducer";
+import {getUsersProfileThunkCreator, setUserProfileType} from "../../redux/Profile-Reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import axios from "axios";
-import {Dispatch} from "redux";
-import {instance} from "../../api/api";
 
 export type profileType = {
     aboutMe: string
@@ -35,10 +32,7 @@ function ProfileContainer(props: any) {
     useEffect(() => {
         let userId = props.match.params.userId
         let res = !userId ? '18301' : userId
-        instance.get(`profile/${res}`)
-            .then(res => {
-                props.setUserProfile(res.data)
-            })
+        props.getUsersProfileThunkCreator(res)
     }, [])
     return <Profile profile={props.profile}/>
 }
@@ -61,13 +55,5 @@ const WithDataContainerComponent = withRouter(ProfileContainer)
 type mapDispatchToProps = {
     setUserProfile: (profile: profileType) => void
 }
-const mapDispatchTProps = (dispatch: Dispatch): mapDispatchToProps => {
-    return {
-        setUserProfile: (profile: profileType) => {
-            dispatch(setUserProfile(profile))
-        }
-    }
-}
 
-
-export default connect(mapStateToProps, mapDispatchTProps)(WithDataContainerComponent);
+export default connect(mapStateToProps, {getUsersProfileThunkCreator})(WithDataContainerComponent);

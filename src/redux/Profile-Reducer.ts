@@ -1,4 +1,6 @@
 import {ActionTypeAll} from "./State";
+import {Dispatch} from "redux";
+import {authAPI, usersAPI} from "../api/api";
 
 export const ADD_POST = 'ADD-POST';
 export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -58,3 +60,9 @@ export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profil
 
 export type UpdateNewPostTextType = ReturnType<typeof UpdateNewPostTextAC>
 export const UpdateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const)
+
+
+export const getUsersProfileThunkCreator = (res: string) => (dispatch: Dispatch) => {
+    authAPI.getProfile(res)
+        .then(data => dispatch(setUserProfile(data)))
+}

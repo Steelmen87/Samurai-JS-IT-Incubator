@@ -16,16 +16,23 @@ export const usersAPI = {
         return instance.get(`auth/me`)
             .then(response => response.data)
     },
-    follow(id: string) {
+    unfollow(id: string) {
         return instance.delete(`follow/${id}`)
             .then(res => {
                 return res.data
             })
     },
-    unFollow(id: string) {
+    follow(id: string) {
         return instance.post(`follow/${id}`)
             .then(res => {
                 return res.data
             })
     }
+}
+export const authAPI = {
+    getProfile(res: string) {
+        return instance.get(`profile/${res}`)
+            .then(res => res.data)
+    }
+
 }

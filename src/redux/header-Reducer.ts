@@ -1,4 +1,6 @@
 import {ActionTypeAll} from "./State";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -35,4 +37,13 @@ export const setUserData = (id: string, email: string, login: string) => ({
     payload: {id, email, login}
 } as const)
 
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+    usersAPI.me()
+        .then(data => {
+            if (data.resultCode === 0) {
+                const {id, email, login} = data.data
+                dispatch(setUserData(id, email, login))
+            }
+        })
+}
 
