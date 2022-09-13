@@ -1,6 +1,7 @@
 import {ActionTypeAll} from "./State";
 import {Dispatch} from "redux";
-import {authAPI, usersAPI} from "../api/api";
+import {authAPI} from "../api/api";
+import {profileType} from "../components/Profile/ProfileContainer";
 
 export const ADD_POST = 'ADD-POST';
 export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -11,17 +12,21 @@ export type PostDataType = {
     message: string
     likeCounter: number
 }
-
-const initialState = {
+export type profilePageType = {
+    postData: Array<PostDataType>,
+    newPostText: string,
+    profile: profileType | null
+}
+const initialState: profilePageType = {
     postData: [
         {id: '1', message: 'Hi how are you ?', likeCounter: 4},
         {id: '2', message: 'It"s my second post', likeCounter: 34},
     ] as Array<PostDataType>,
     newPostText: 'it-kamasutra.com',
-    profile: null,
+    profile: null
 
 }
-export type profilePageType = typeof initialState
+
 
 export const profileReducer = (state: profilePageType = initialState, action: ActionTypeAll): profilePageType => {
     switch (action.type) {
@@ -56,13 +61,14 @@ export const AddPostAC = (message: string) => ({type: ADD_POST, message} as cons
 
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 
-export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile} as const)
+export const setUserProfile = (profile: profileType) => ({type: SET_USER_PROFILE, profile} as const)
 
 export type UpdateNewPostTextType = ReturnType<typeof UpdateNewPostTextAC>
 export const UpdateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const)
 
 
-export const getUsersProfileThunkCreator = (res: string) => (dispatch: Dispatch) => {
-    authAPI.getProfile(res)
+export const getUsersProfileThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+    if (userId === undefined) return
+    authAPI.getProfile(userId)
         .then(data => dispatch(setUserProfile(data)))
 }

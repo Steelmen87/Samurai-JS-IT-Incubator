@@ -47,10 +47,10 @@ class UsersContainer extends React.Component<any> {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     }
 
-    onFollowHandler = (id: string) => {
+    onFollowHandler = (id: number) => {
         this.props.followingThunkCreator(id)
     }
-    onUnFollowHandler = (id: string) => {
+    onUnFollowHandler = (id: number) => {
         this.props.unfollowingThunkCreator(id)
     }
 

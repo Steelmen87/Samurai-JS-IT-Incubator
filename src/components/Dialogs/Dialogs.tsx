@@ -3,15 +3,17 @@ import style from './Dialogs.module.css'
 import {initialStateType} from "../../redux/Dialog-Reducer";
 import {Dialog} from "./DialogItem/Dialog";
 import Message from "./Message/Message";
+import {Redirect} from 'react-router-dom';
 
 
 type PropsDialogType = {
-    dialogsPage:initialStateType
+    dialogsPage: initialStateType
     changeNewText: (e: string) => void
     addDialogText: (message: string) => void
+    isAuth: boolean
 }
 const Dialogs = (props: PropsDialogType) => {
-    const {addDialogText, changeNewText,dialogsPage} = props
+    const {addDialogText, changeNewText, dialogsPage, isAuth} = props
 
     const dialogsElements = dialogsPage.dialogsData.map((el, i) =>
         <Dialog key={i} name={el.name}
@@ -28,6 +30,7 @@ const Dialogs = (props: PropsDialogType) => {
     const onChangeDialog = (e: ChangeEvent<HTMLTextAreaElement>) => {
         changeNewText(e.currentTarget.value)
     }
+    if (!isAuth ) return <Redirect to={'/login'}/>
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>

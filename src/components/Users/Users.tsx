@@ -10,10 +10,10 @@ type propsType = {
     totalCount: number
     currentPage: number
     onClickPageChanged: (p: number) => void
-    onUnFollowHandler: (id: string) => void
-    onFollowHandler: (id: string) => void
+    onUnFollowHandler: (id: number) => void
+    onFollowHandler: (id: number) => void
     // toggleFollowIsProgress: (isFetching: boolean, id: string) => void
-    followingInProgress: string[]
+    followingInProgress: number[]
 }
 const Users = (props: propsType) => {
     const {
