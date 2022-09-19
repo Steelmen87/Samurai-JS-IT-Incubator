@@ -7,14 +7,15 @@ import Music from "./components/Navbar/Music/Music";
 import Settings from './components/Navbar/Settirngs/Settings';
 import UsersContainer from "./components/Users/UsersContainer";
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./Login/Login";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 type AppPropsType = {}
 
 const App: React.FC<AppPropsType> = (props) => {
+
 
 
     return (
