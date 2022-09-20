@@ -1,4 +1,4 @@
-import {AddPostType, setUserProfileType, UpdateNewPostTextType} from "./Profile-Reducer";
+import {AddPostType, getStatusType, setUserProfileType, UpdateNewPostTextType} from "./Profile-Reducer";
 import {AddDialogTextType, ChangeDialogTextType} from "./Dialog-Reducer";
 import {
     followACType, followIsProgressType,
@@ -22,6 +22,7 @@ export type ActionTypeAll = UpdateNewPostTextType
     | setUserProfileType
     | setUserDataType
     | followIsProgressType
+    | getStatusType
 
 export type MessageType = {
     id: string

@@ -29,10 +29,16 @@ export const usersAPI = {
             })
     }
 }
-export const authAPI = {
+export const profileAPI = {
     getProfile(userId: number) {
         return instance.get(`profile/${userId}`)
             .then(res => res.data)
-    }
+    },
+    getStatus(userId:string){
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus(status:string){
+        return instance.put(`profile/status`,{status})
+    },
 
 }

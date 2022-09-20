@@ -5,12 +5,13 @@ import {profileType} from "./ProfileContainer";
 
 type ProfileType = {
     profile: profileType
-
+    status: string
+    updateStatus:Function
 }
-const Profile = ({profile }: ProfileType) => {
+const Profile = ({profile,status,updateStatus}: ProfileType) => {
     return (
         <div>
-            <ProfileInfo profile={profile}/>
+            <ProfileInfo profile={profile} status={status} updateStatus={updateStatus}/>
             <MyPostsContainer/>
         </div>
     )
