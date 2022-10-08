@@ -1,11 +1,12 @@
 import React, {ChangeEvent} from "react";
-import { profilePageType } from "../../../redux/Profile-Reducer";
+import {profilePageType} from "../../../redux/Profile-Reducer";
 import style from './MyPosts.module.css'
 import Post from "./Post/Post";
+import {FormPostType, PostFormRedux} from "./MyPostsForm";
 
 
 export type PropsType = {
-    profilePage:profilePageType
+    profilePage: profilePageType
     updateNewPostText: (newText: string) => void
     addPost(postMessage: string): void
 }
@@ -19,9 +20,9 @@ const MyPosts = (props: PropsType) => {
               likeCounter={el.likeCounter}
         />)
 
-    let ButtonAddPost = () => {
-        if (profilePage.newPostText.trim() === '') return
-        addPost(profilePage.newPostText)
+    let ButtonAddPost = (values: FormPostType) => {
+        console.log(values)
+        addPost(values.newPostText)
 
     }
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -33,9 +34,12 @@ const MyPosts = (props: PropsType) => {
         <div className={style.postsBlock}>
             <h3>My post</h3>
             <div>
-                <textarea value={profilePage.newPostText} onChange={onPostChange}/>
+                <PostFormRedux onSubmit={ButtonAddPost}/>
+                {/* <textarea
+                    value={profilePage.newPostText}
+                    onChange={onPostChange}/>
                 <br/>
-                <button onClick={ButtonAddPost}>Add post</button>
+                <button onClick={ButtonAddPost}>Add post</button>*/}
             </div>
             <div className={style.posts}>{postElement}</div>
         </div>
@@ -43,3 +47,4 @@ const MyPosts = (props: PropsType) => {
     )
 }
 export default MyPosts;
+

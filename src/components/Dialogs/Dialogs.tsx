@@ -1,8 +1,9 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
 import style from './Dialogs.module.css'
 import {initialStateType} from "../../redux/Dialog-Reducer";
 import {Dialog} from "./DialogItem/Dialog";
 import Message from "./Message/Message";
+import {FormMessageType, MessageFormRedux} from "./DialogsMessage";
 
 
 type PropsDialogType = {
@@ -12,7 +13,7 @@ type PropsDialogType = {
     isAuth: boolean
 }
 const Dialogs = (props: PropsDialogType) => {
-    const {addDialogText, changeNewText, dialogsPage, isAuth} = props
+    const {addDialogText,  dialogsPage, isAuth} = props
 
     const dialogsElements = dialogsPage.dialogsData.map((el, i) =>
         <Dialog key={i} name={el.name}
@@ -23,11 +24,8 @@ const Dialogs = (props: PropsDialogType) => {
         <Message key={i}
                  message={el.message}/>)
 
-    const addMessage = () => {
-        addDialogText(dialogsPage.newMassageText)
-    }
-    const onChangeDialog = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        changeNewText(e.currentTarget.value)
+    const addMessage = (values: FormMessageType) => {
+        addDialogText(values.newMassageText)
     }
 
     return (
@@ -39,11 +37,7 @@ const Dialogs = (props: PropsDialogType) => {
                 {messagesData}
             </div>
             <div className={style.addMessage}>
-                <textarea
-                    value={dialogsPage.newMassageText}
-                    onChange={onChangeDialog}
-                />
-                <button onClick={addMessage}>add message</button>
+                <MessageFormRedux onSubmit={addMessage}/>
             </div>
 
         </div>
