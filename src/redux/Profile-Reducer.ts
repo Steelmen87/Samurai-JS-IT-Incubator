@@ -86,12 +86,12 @@ export const getUsersProfileThunkCreator = (userId: number) => (dispatch: Dispat
         .then(data => dispatch(setUserProfile(data)))
 }
 export const getStatusThunkCreator = (userId: string) => (dispatch: Dispatch) => {
-    debugger
+
     profileAPI.getStatus(userId)
         .then(data => dispatch(getStatusAC(data.data)))
 }
 export const updateStatusThunkCreator = (status: string) => (dispatch: Dispatch) => {
-    debugger
+
     profileAPI.updateStatus(status)
         .then((res) => {
             if(res.data.resultCode === 0) {
