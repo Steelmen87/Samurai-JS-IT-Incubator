@@ -39,7 +39,7 @@ function ProfileContainer(props: any) {
     useEffect(() => {
         let userId = props.match.params.userId;
         if (!userId) {
-            userId = 18301;
+            userId = props.authorizedUserId;
         }
         props.getUsersProfileThunkCreator(userId);
         props.getStatusThunkCreator(userId);
@@ -53,10 +53,14 @@ function ProfileContainer(props: any) {
 type mapStateToPropsType = {
     profile: profileType | null
     status: string | null
+    authorizedUserId:string|null
+    isAuth:boolean
 }
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId:state.auth.id,
+    isAuth:state.auth.isAuth
 })
 type PathParamsType = {
     userId: string

@@ -1,6 +1,8 @@
 import {ActionTypeAll} from "./State";
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
+import {AppThunk} from "./redux-store";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -46,12 +48,17 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
         })
 }
 
-export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
+export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
     usersAPI.login(email, password, rememberMe)
         .then(data => {
             if (data.resultCode === 0) {
-                // @ts-ignore
                 dispatch(getAuthUserData())
+            } else {
+                let message = data.messages.length > 0 ? data.messages[0] : "Some Error"
+                console.log(message)
+
+                const action = stopSubmit("login", {_error: message});
+                dispatch(action)
             }
         })
 }

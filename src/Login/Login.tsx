@@ -3,15 +3,16 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../components/common/FormsControls/Textarea";
 import {required} from "../utils/validators/Validators";
 import {connect} from "react-redux";
-import {initialState, login} from "../redux/header-Reducer";
+import {login} from "../redux/header-Reducer";
 import {Redirect} from "react-router-dom";
-import {initialStateType} from "../redux/Dialog-Reducer";
 import {AppStateType} from "../redux/redux-store";
+import s from '../components/common/FormsControls/Style.module.css'
 
 type FormDataType = {
     login: string
     password: string
     rememberMe: boolean
+    error:string
 }
 
 const LoginForm = (props: InjectedFormProps<FormDataType>) => {
@@ -39,6 +40,9 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
                     type={"checkbox"}/>
                 remember me
             </div>
+            {props.error && <div className={s.form_summary_error}>
+                {props.error}
+            </div>}
             <div>
                 <button>login</button>
             </div>
