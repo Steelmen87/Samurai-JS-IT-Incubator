@@ -16,6 +16,14 @@ export const usersAPI = {
         return instance.get(`auth/me`)
             .then(response => response.data)
     },
+    login(email: string, password: string, rememberMe: boolean=false) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
+            .then(response => response.data)
+    },
+    logout() {
+        return instance.delete(`auth/login`)
+            .then(response => response.data)
+    },
     unfollow(id: number) {
         return instance.delete(`follow/${id}`)
             .then(res => {
@@ -34,11 +42,11 @@ export const profileAPI = {
         return instance.get(`profile/${userId}`)
             .then(res => res.data)
     },
-    getStatus(userId:string){
+    getStatus(userId: string) {
         return instance.get(`profile/status/${userId}`)
     },
-    updateStatus(status:string){
-        return instance.put(`profile/status`,{status})
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, {status})
     },
 
 }
