@@ -80,17 +80,17 @@ export type UpdateNewPostTextType = ReturnType<typeof UpdateNewPostTextAC>
 export const UpdateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const)
 
 
-export const getUsersProfileThunkCreator = (userId: number) => (dispatch: Dispatch) => {
+export const getUsersProfileThunkCreator = (userId: number) => (dispatch: Dispatch<ActionTypeAll>) => {
     if (userId === undefined) return
     profileAPI.getProfile(userId)
         .then(data => dispatch(setUserProfile(data)))
 }
-export const getStatusThunkCreator = (userId: string) => (dispatch: Dispatch) => {
+export const getStatusThunkCreator = (userId: string) => (dispatch: Dispatch<ActionTypeAll>) => {
 
     profileAPI.getStatus(userId)
         .then(data => dispatch(getStatusAC(data.data)))
 }
-export const updateStatusThunkCreator = (status: string) => (dispatch: Dispatch) => {
+export const updateStatusThunkCreator = (status: string) => (dispatch: Dispatch<ActionTypeAll>) => {
 
     profileAPI.updateStatus(status)
         .then((res) => {

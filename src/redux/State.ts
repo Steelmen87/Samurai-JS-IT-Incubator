@@ -8,6 +8,7 @@ import {
     unfollowACType
 } from "./Users-Reducer";
 import {setUserDataType} from "./header-Reducer";
+import {initializedType} from "./app-Reducer";
 
 export type ActionTypeAll =
     UpdateNewPostTextType
@@ -24,6 +25,7 @@ export type ActionTypeAll =
     | setUserDataType
     | followIsProgressType
     | getStatusType
+    | initializedType
 
 export type MessageType = {
     id: string

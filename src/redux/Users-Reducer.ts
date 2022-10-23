@@ -1,6 +1,8 @@
 import {ActionTypeAll} from "./State";
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/api";
+import {ThunkAction} from "redux-thunk";
+import {AppStateType, AppThunk} from "./redux-store";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -114,22 +116,22 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => (
             dispatch(setTotalUsersCount(data.totalCount))
         })
 }
-export const unfollowingThunkCreator = (id: number) => (dispatch: Dispatch) => {
+export const unfollowingThunkCreator = (id: number): AppThunk => (dispatch) => {
     dispatch(toggleFollowIsProgress(true, id))
     usersAPI.unfollow(id)
         .then(data => {
             if (data.resultCode === 0) {
-               dispatch(unfollow(id))
+                dispatch(unfollow(id))
             }
             dispatch(toggleFollowIsProgress(false, id))
         })
 }
-export const followingThunkCreator = (id: number) => (dispatch: Dispatch) => {
+export const followingThunkCreator = (id: number): AppThunk => (dispatch) => {
     dispatch(toggleFollowIsProgress(true, id))
     usersAPI.follow(id)
         .then(data => {
             if (data.resultCode === 0) {
-               dispatch(follow(id))
+                dispatch(follow(id))
             }
             dispatch(toggleFollowIsProgress(false, id))
         })

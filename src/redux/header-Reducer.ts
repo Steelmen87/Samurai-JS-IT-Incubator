@@ -38,8 +38,8 @@ export const setUserData = (id: string | null, email: string | null, login: stri
     payload: {id, email, login, isAuth}
 } as const)
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
-    usersAPI.me()
+export const getAuthUserData = () => (dispatch: Dispatch<setUserDataType>) => {
+    return usersAPI.me()
         .then(data => {
             if (data.resultCode === 0) {
                 const {id, email, login} = data.data
